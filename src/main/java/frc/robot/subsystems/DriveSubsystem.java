@@ -75,6 +75,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+
+    SmartDashboard.putNumber("Gyro Roll Axis", m_gyro.getAngle(m_gyro.getRollAxis()));
     // Update the odometry in the periodic block
     m_odometry.update(
         Rotation2d.fromDegrees(m_gyro.getAngle(m_gyro.getRollAxis()) * -1),

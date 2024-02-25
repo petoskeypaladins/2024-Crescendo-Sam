@@ -4,10 +4,25 @@
 
 package frc.robot.commands;
 
+import java.util.List;
+
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import frc.robot.Constants.AutoConstants;
+import frc.robot.Constants.DriveConstants;
 // import frc.robot.Robot;
 import frc.robot.RobotContainer;
+
+
 
 public class TeleopDriveCommand extends Command {
   /** Creates a new TeleopDriveCommand. */
@@ -42,10 +57,11 @@ public class TeleopDriveCommand extends Command {
     } else {
       rot = 0;
     }  
-    RobotContainer.m_DriveSubsystem.drive(xSpeed, ySpeed, rot, true, true);
+    RobotContainer.m_DriveSubsystem.drive(xSpeed, ySpeed, rot, false, true);
+   
     
-    // SmartDashboard.putNumber("Controller X", RobotContainer.m_driverController.getRightX());
   }
+
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}

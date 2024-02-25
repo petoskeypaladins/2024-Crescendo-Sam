@@ -7,7 +7,8 @@ package frc.robot;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.AutonMoveOnly;
+import frc.robot.commands.AutonMoveForward;
+import frc.robot.commands.ClimbCommand;
 // import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCommand;
@@ -15,11 +16,14 @@ import frc.robot.commands.MoveServoCommand;
 import frc.robot.commands.ServoAngleCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TeleopDriveCommand;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 // import frc.robot.subsystems.MAXSwerveModule;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.USB0Camera;
+//import frc.robot.subsystems.USB1Camera;
 
 import java.util.List;
 
@@ -53,15 +57,16 @@ public class RobotContainer {
   public static final DriveSubsystem m_DriveSubsystem = new DriveSubsystem();
   public static final IntakeSubsystem m_IntakeSubsytem = new IntakeSubsystem();
   public static final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
+  public static final ClimbSubsystem m_ClimbSubsystem = new ClimbSubsystem();
 
   public final TeleopDriveCommand m_DriveCommand = new TeleopDriveCommand();
   public final IntakeCommand m_IntakeCommand = new IntakeCommand();
   public final ShooterCommand m_ShooterCommand = new ShooterCommand();
   public final ServoAngleCommand m_ServoAngleCommand = new ServoAngleCommand(0);
   public final MoveServoCommand m_MoveServoCommand = new MoveServoCommand();
-
+  public final ClimbCommand m_ClimbCommand = new ClimbCommand();
   //Autonomous Commands
-  
+  public final AutonMoveForward m_AutonMoveForward = new AutonMoveForward();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public static final CommandXboxController m_driverController =
@@ -69,7 +74,8 @@ public class RobotContainer {
 
       public static XboxController xboxController = new XboxController(0);
       public static Joystick joystick = new Joystick(1);
-
+  public static final USB0Camera M_USB0CAMERA = new USB0Camera();
+  //public static final USB1Camera M_USB1CAMERA = new USB1Camera();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -104,47 +110,7 @@ public class RobotContainer {
     // An example command will be run in autonomous
     // return Autos.exampleAuto(m_exampleSubsystem);
 
-    TrajectoryConfig trajectoryConfig = new TrajectoryConfig(//
-    AutoConstants.kMaxSpeedMetersPerSecond,
-    AutoConstants.kMaxAccelerationMetersPerSecondSquared) //
-      .setKinematics(DriveConstants.kDriveKinematics);
-
- 
-      //MAKE TRAJECTORY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      edu.wpi.first.math.trajectory.Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(0, 0, new Rotation2d(0)), //
-        List.of(//
-          new Translation2d(0, 0.5),
-          new Translation2d(1,1),
-          new Translation2d(1,0),
-          new Translation2d(0.5,-0.5),
-          new Translation2d(0,-0.5)
-      ),
-      new Pose2d(0,0, Rotation2d.fromDegrees(270)),
-      trajectoryConfig //
-      );
-
-      PIDController xController = new PIDController(AutoConstants.kPYController, 0, 0);
-      PIDController yController = new PIDController(AutoConstants.kPYController, 0, 0);
-      ProfiledPIDController thetaController = new ProfiledPIDController(AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
-      thetaController.enableContinuousInput(-Math.PI , Math.PI);
-      
-      //4. Construct command to follow trajectory
-      SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
-         trajectory, 
-         m_DriveSubsystem::getPose,
-         DriveConstants.kDriveKinematics,
-         xController,
-         yController,
-         thetaController,
-         m_DriveSubsystem::setModuleStates,
-         m_DriveSubsystem);
-        
-
-        return new SequentialCommandGroup(//
-        new InstantCommand(() -> m_DriveSubsystem.resetOdometry(trajectory.getInitialPose())), //
-        swerveControllerCommand 
-        ); 
+    return m_AutonMoveForward;
         
   } 
 }

@@ -64,7 +64,7 @@ public final class Constants {
 
     public static final int leftWinch = 9;
     public static final int rightWinch = 10;
-    public static final int hookArms = 11;
+    //public static final int hookArms = 11;
     
     public static final int intake = 12;
 

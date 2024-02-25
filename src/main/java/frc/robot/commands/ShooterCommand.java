@@ -46,9 +46,10 @@ public class ShooterCommand extends Command {
       // Revs intake wheels to shoot
       if (RobotContainer.joystick.getRawButton(1)) {
       ShooterSubsystem.shooterWheels.set(0.8);
+    
     }
       else if (RobotContainer.joystick.getRawButton(11)) {
-        ShooterSubsystem.shooterWheels.set(0.22);
+        ShooterSubsystem.shooterWheels.set(0.21);
       }
       // Stops intake and flywheels
       else {
@@ -66,12 +67,12 @@ public class ShooterCommand extends Command {
       ShooterSubsystem.pivotMotor.set(-1 * RobotContainer.joystick.getRawAxis(1));
     }
      //preset motor in shooting POSITION. MAX VALUE IS 0.332, min value is 0.326!
-    else if (RobotContainer.joystick.getRawButton(5)) {
+    else if (RobotContainer.joystick.getRawButton(7)) {
       if(ShooterSubsystem.pivotEncoder.getAbsolutePosition() < 0.326) {
-        ShooterSubsystem.pivotMotor.set(-0.25);
+        ShooterSubsystem.pivotMotor.set(-0.2 - (0.326 - ShooterSubsystem.pivotEncoder.getAbsolutePosition()));
       }
       else if (ShooterSubsystem.pivotEncoder.getAbsolutePosition() > 0.332) {
-        ShooterSubsystem.pivotMotor.set(0.3);
+        ShooterSubsystem.pivotMotor.set(0.2 + (ShooterSubsystem.pivotEncoder.getAbsolutePosition() - 0.332));
       }
       else {
         ShooterSubsystem.pivotMotor.set(0);
