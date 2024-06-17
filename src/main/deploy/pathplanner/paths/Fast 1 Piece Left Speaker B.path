@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.2594611570989525,
+        "y": 7.1068489379185005
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.2594611570989516,
+        "y": 7.1068489379185005
+      },
+      "isLocked": false,
+      "linkedName": "Fast 1 Piece Left Speaker End"
+    },
+    {
+      "anchor": {
+        "x": 3.288546748033667,
+        "y": 7.1068489379185005
+      },
+      "prevControl": {
+        "x": 2.288546748033667,
+        "y": 7.1068489379185005
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Fast 1 Piece Left Speaker B End"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": false
+}

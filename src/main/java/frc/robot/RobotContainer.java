@@ -4,43 +4,51 @@
 
 package frc.robot;
 
-import frc.robot.Constants.AutoConstants;
-import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutonMoveForward;
-import frc.robot.commands.ClimbCommand;
-// import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.LeftBackwardClimbCommand;
+import frc.robot.commands.LeftClimbFastCommand;
+import frc.robot.commands.LeftForwardClimbCommand;
 import frc.robot.commands.MoveServoCommand;
+import frc.robot.commands.OuttakeCommand;
+import frc.robot.commands.PivotCommand;
+import frc.robot.commands.PivotDownCommand;
+import frc.robot.commands.PivotUpCommand;
+import frc.robot.commands.ResetGyroCommand;
+import frc.robot.commands.RightBackwardClimbCommand;
+import frc.robot.commands.RightClimbFastCommand;
+import frc.robot.commands.RightForwardClimbCommand;
 import frc.robot.commands.ServoAngleCommand;
-import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.ServoCommand;
+import frc.robot.commands.ShooterAmpCommand;
+import frc.robot.commands.ShooterSpeakerCommand;
+import frc.robot.commands.SpeakerPresetCommand;
+import frc.robot.commands.StopperCommand;
+import frc.robot.commands.StopperReturnCommand;
 import frc.robot.commands.TeleopDriveCommand;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ServoSubsystem;
+import frc.robot.subsystems.StopperSubsystem;
 // import frc.robot.subsystems.MAXSwerveModule;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.USB0Camera;
-//import frc.robot.subsystems.USB1Camera;
+import frc.robot.subsystems.USB1Camera;
 
-import java.util.List;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-// import edu.wpi.first.math.proto.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -52,19 +60,41 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static final DriveSubsystem m_DriveSubsystem = new DriveSubsystem();
   public static final IntakeSubsystem m_IntakeSubsytem = new IntakeSubsystem();
   public static final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
   public static final ClimbSubsystem m_ClimbSubsystem = new ClimbSubsystem();
+  public static final ServoSubsystem m_ServoSubsystem = new ServoSubsystem();
+  public static final StopperSubsystem m_StopperSubsystem = new StopperSubsystem();
 
   public final TeleopDriveCommand m_DriveCommand = new TeleopDriveCommand();
   public final IntakeCommand m_IntakeCommand = new IntakeCommand();
-  public final ShooterCommand m_ShooterCommand = new ShooterCommand();
+  public final ShooterSpeakerCommand m_ShooterSpeakerCommand = new ShooterSpeakerCommand();
+  public final ShooterAmpCommand m_ShooterAmpCommand = new ShooterAmpCommand();
   public final ServoAngleCommand m_ServoAngleCommand = new ServoAngleCommand(0);
   public final MoveServoCommand m_MoveServoCommand = new MoveServoCommand();
-  public final ClimbCommand m_ClimbCommand = new ClimbCommand();
+  public final PivotCommand m_PivotCommand = new PivotCommand();
+  public final SpeakerPresetCommand m_SpeakerPresetCommand = new SpeakerPresetCommand();
+  public final ServoCommand m_ServoCommand = new ServoCommand();
+  public final OuttakeCommand m_OuttakeCommand = new OuttakeCommand();
+  public final PivotDownCommand m_PivotDownCommand = new PivotDownCommand();
+  public final ResetGyroCommand m_ResetGyroCommand = new ResetGyroCommand();
+  public final PivotUpCommand m_PivotUpCommand = new PivotUpCommand();
+  public final LeftForwardClimbCommand m_LeftForwardClimbCommand = new LeftForwardClimbCommand();
+  public final RightForwardClimbCommand m_RightForwardClimbCommand = new RightForwardClimbCommand();
+  public final RightBackwardClimbCommand m_RightBackwardClimbCommand = new RightBackwardClimbCommand();
+  public final LeftBackwardClimbCommand m_LeftBackwardClimbCommand = new LeftBackwardClimbCommand();
+  public final LeftClimbFastCommand m_LeftClimbFastCommand = new LeftClimbFastCommand();
+  public final RightClimbFastCommand m_RightClimbFastCommand = new RightClimbFastCommand();
+  public final StopperCommand m_StopperCommand = new StopperCommand();
+  public final StopperReturnCommand m_StopperReturnCommand = new StopperReturnCommand();
+
+    
+  
+
   //Autonomous Commands
   public final AutonMoveForward m_AutonMoveForward = new AutonMoveForward();
 
@@ -74,12 +104,38 @@ public class RobotContainer {
 
       public static XboxController xboxController = new XboxController(0);
       public static Joystick joystick = new Joystick(1);
+      public static CommandJoystick joystick2 = new CommandJoystick(1);
   public static final USB0Camera M_USB0CAMERA = new USB0Camera();
-  //public static final USB1Camera M_USB1CAMERA = new USB1Camera();
+
+
+  private final SendableChooser<Command> autoChooser;
+  public static final USB1Camera M_USB1CAMERA = new USB1Camera();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+
+
+    NamedCommands.registerCommand("Intake Command", m_IntakeCommand);
+    NamedCommands.registerCommand("Intake Stop Command", Commands.runOnce(() -> m_IntakeSubsytem.stop(), m_IntakeSubsytem));
+    NamedCommands.registerCommand("Speaker Preset", m_SpeakerPresetCommand);
+    NamedCommands.registerCommand("Speaker Rev", m_ShooterSpeakerCommand);
+    NamedCommands.registerCommand("Shoot Command", Commands.runOnce(() -> m_ServoSubsystem.moveServo(), m_ServoSubsystem));
+    NamedCommands.registerCommand("Stop Rev", Commands.runOnce(() -> m_ShooterSubsystem.stop(), m_ShooterSubsystem));
+    NamedCommands.registerCommand("Pivot Down", m_PivotDownCommand);
+    NamedCommands.registerCommand("Reset Servo", Commands.runOnce(() -> m_ServoSubsystem.resetServo(), m_ServoSubsystem));
+    NamedCommands.registerCommand("Reset Gyro", Commands.runOnce(() -> m_DriveSubsystem.resetGyro(0), m_DriveSubsystem));
+    NamedCommands.registerCommand("Reset Gyro 120", Commands.runOnce(() -> m_DriveSubsystem.resetGyro(120), m_DriveSubsystem));
+    NamedCommands.registerCommand("Pivot Up", m_PivotUpCommand);
+    NamedCommands.registerCommand("Engage Stopper", Commands.runOnce(() -> m_StopperSubsystem.resetStopper(), m_ShooterSubsystem));
+    NamedCommands.registerCommand("Reset Stopper", Commands.runOnce(() -> m_StopperSubsystem.moveStopper(), m_ShooterSubsystem));
+    NamedCommands.registerCommand("Sit There", Commands.runOnce(() -> m_DriveSubsystem.nothing(), m_DriveSubsystem));
+
+   autoChooser = AutoBuilder.buildAutoChooser();
+    
+   SmartDashboard.putData("Select Auto", autoChooser);
+
+   
   }
 
   /**
@@ -92,13 +148,68 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
 
+    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
+    m_DriveSubsystem.setDefaultCommand(m_DriveCommand);
+
+
+     // Intake
+     m_driverController.rightBumper().whileTrue(m_IntakeCommand);
+     
+    // Shoots Speaker
+    joystick2.button(1).whileTrue(m_ShooterSpeakerCommand);
+
+    // Shoots Amp (Outtake)
+    joystick2.button(11).whileTrue(m_ShooterAmpCommand);
+    joystick2.button(11).whileTrue(m_OuttakeCommand);
+
+    // Pivots
+    joystick2.axisGreaterThan(1, 0.02).whileTrue(m_PivotCommand);
+    joystick2.axisLessThan(1, -0.02).whileTrue(m_PivotCommand);
+
+    // Speaker Preset
+    joystick2.button(7).whileTrue(m_SpeakerPresetCommand);
+
+    // Moves Servo
+    joystick2.button(2).whileTrue(m_ServoCommand);
+
+    //Moves Stopper Out
+    joystick2.button(9).whileTrue(m_StopperReturnCommand);
+
+    //Moves Stopper Back
+    joystick2.button(10).whileTrue(m_StopperCommand);
+
+    // Resets Gyro
+    m_driverController.povDown().whileTrue(m_ResetGyroCommand);
+
+    // Left Climb Forward
+     joystick2.axisGreaterThan(3, 0).whileTrue(m_RightForwardClimbCommand);
+
+    // Right Climb Forward
+    joystick2.axisGreaterThan(3, 0).whileTrue(m_LeftForwardClimbCommand);
+
+
+
+    // Left Climb Backward
+    //joystick2.button(3).whileTrue(m_LeftBackwardClimbCommand);
+
+    // Right Climb Backward
+    //joystick2.button(4).whileTrue(m_RightBackwardClimbCommand);
+
+
+  
+    
+    
+
+
+    
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
+
+    // Intakes
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+
+    
   }
 
   /**
@@ -110,7 +221,7 @@ public class RobotContainer {
     // An example command will be run in autonomous
     // return Autos.exampleAuto(m_exampleSubsystem);
 
-    return m_AutonMoveForward;
+    return autoChooser.getSelected();
         
   } 
 }

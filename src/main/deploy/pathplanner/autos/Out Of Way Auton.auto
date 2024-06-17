@@ -1,0 +1,32 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.45095045059448935,
+      "y": 2.02794970910607
+    },
+    "rotation": 180.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Out Of Way"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Working Autons",
+  "choreoAuto": false
+}

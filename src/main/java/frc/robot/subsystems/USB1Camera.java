@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class USB1Camera extends SubsystemBase {
   /** Creates a new USB1Camera. */
   public USB1Camera() {
-    CameraServer.startAutomaticCapture(0);
+    //CameraServer.startAutomaticCapture(0);
     CameraServer.startAutomaticCapture(1);
   }
 

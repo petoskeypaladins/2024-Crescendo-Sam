@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.797392261451189,
+        "y": 4.092954054853979
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.77400395256631,
+        "y": 4.081259900411539
+      },
+      "isLocked": false,
+      "linkedName": "2 Pc Spkr R end"
+    },
+    {
+      "anchor": {
+        "x": 0.6654451313653237,
+        "y": 4.748132251608921
+      },
+      "prevControl": {
+        "x": 0.6537509769228836,
+        "y": 4.748132251608921
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Stage Side End"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 147.52880770915144,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": false
+}

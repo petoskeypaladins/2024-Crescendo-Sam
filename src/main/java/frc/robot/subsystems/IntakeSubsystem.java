@@ -11,13 +11,25 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
 public class IntakeSubsystem extends SubsystemBase {
-  /** Creates a new IntakeSubsystem. */
+  /* Creates a new IntakeSubsystem. */
 
-public static CANSparkMax intakeMotor = new CANSparkMax(DriveConstants.intake, MotorType.kBrushless); 
+private CANSparkMax intakeMotor = new CANSparkMax(DriveConstants.intake, MotorType.kBrushless); 
   public IntakeSubsystem() {}
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  public void intake() {
+intakeMotor.set(0.5);
+  }
+
+  public void stop() {
+    intakeMotor.set(0);
+  }
+
+  public void outtake() {
+    intakeMotor.set(-0.5);
   }
 }

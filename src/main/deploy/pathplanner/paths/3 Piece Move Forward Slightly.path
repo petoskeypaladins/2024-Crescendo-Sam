@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.363529026345465,
+        "y": 0.779980657348488
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 8.363529026345468,
+        "y": 0.7799806573484882
+      },
+      "isLocked": false,
+      "linkedName": "Right Side Speaker End"
+    },
+    {
+      "anchor": {
+        "x": 8.29950581516365,
+        "y": 0.779980657348488
+      },
+      "prevControl": {
+        "x": 7.29950581516365,
+        "y": 0.779980657348488
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Slightly 3 Pc End"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 6.0,
+    "maxAcceleration": 6.0,
+    "maxAngularVelocity": 720.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

@@ -6,7 +6,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ShooterSubsystem;
 
 public class ServoAngleCommand extends Command {
   /** Creates a new ServoAngleCommand. */
@@ -15,7 +14,7 @@ public class ServoAngleCommand extends Command {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.m_ShooterSubsystem);
 
-    ShooterSubsystem.servo.setPosition(position);
+    RobotContainer.m_ShooterSubsystem.servo.setPosition(position);
   }
 
   // Called when the command is initially scheduled.

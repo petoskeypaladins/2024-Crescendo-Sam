@@ -1,0 +1,74 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 0.7859976973515199,
+        "y": 4.525637769224256
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 0.7802540991784751,
+        "y": 4.558211333122236
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.8852482149408742,
+        "y": 4.092954054853979
+      },
+      "prevControl": {
+        "x": 1.7750595549686021,
+        "y": 4.108695291992874
+      },
+      "nextControl": {
+        "x": 2.0489663771350335,
+        "y": 4.0695657459691
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.797392261451189,
+        "y": 4.092954054853979
+      },
+      "prevControl": {
+        "x": 2.8558630336633883,
+        "y": 4.128036518181299
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "2 Pc Spkr R end"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": 0.0,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": {
+    "rotation": 122.00538320808353,
+    "velocity": 0
+  },
+  "useDefaultConstraints": false
+}

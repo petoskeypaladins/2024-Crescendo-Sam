@@ -1,0 +1,68 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 0.7303032351868063,
+        "y": 6.634371446200927
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.107604044153132,
+        "y": 7.287875617067442
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.7244746240092,
+        "y": 7.1068489379185005
+      },
+      "prevControl": {
+        "x": 1.6601991711387847,
+        "y": 7.091725301948991
+      },
+      "nextControl": {
+        "x": 2.2264819589591207,
+        "y": 7.224968310847893
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.2594611570989525,
+        "y": 7.1068489379185005
+      },
+      "prevControl": {
+        "x": 2.2374509114881382,
+        "y": 7.1068489379185005
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Fast 1 Piece Left Speaker End"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.5,
+    "maxAcceleration": 2.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 19.290046219188802,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": {
+    "rotation": -118.92642583525364,
+    "velocity": 0
+  },
+  "useDefaultConstraints": false
+}

@@ -16,6 +16,7 @@ import com.revrobotics.SparkPIDController;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.RelativeEncoder;
 
+import frc.robot.RobotContainer;
 import frc.robot.Constants.ModuleConstants;
 
 public class MAXSwerveModule {
@@ -148,6 +149,10 @@ public class MAXSwerveModule {
    */
   public void setDesiredState(SwerveModuleState desiredState) {
     // Apply chassis angular offset to the desired state.
+    if (Math.abs(desiredState.speedMetersPerSecond) < 0.001) {
+      
+      
+    }
     SwerveModuleState correctedDesiredState = new SwerveModuleState();
     correctedDesiredState.speedMetersPerSecond = desiredState.speedMetersPerSecond;
     correctedDesiredState.angle = desiredState.angle.plus(Rotation2d.fromRadians(m_chassisAngularOffset));
@@ -164,6 +169,7 @@ public class MAXSwerveModule {
 
   }
 
+  
   /** Zeroes all the SwerveModule encoders. */
   public void resetEncoders() {
     m_drivingEncoder.setPosition(0);

@@ -4,21 +4,10 @@
 
 package frc.robot.commands;
 
-import java.util.List;
-
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
-import frc.robot.Constants.AutoConstants;
-import frc.robot.Constants.DriveConstants;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 // import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
@@ -29,6 +18,10 @@ public class TeleopDriveCommand extends Command {
   double xSpeed = 0;
   double ySpeed = 0;
   double rot = 0;
+  double SpeedMultiplier;
+
+  private boolean isRobotOriented;
+
   public TeleopDriveCommand() {
     
     // Use addRequirements() here to declare subsystem dependencies.
@@ -37,29 +30,54 @@ public class TeleopDriveCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.m_ShooterSubsystem.servo.set(1);
+    RobotContainer.m_ShooterSubsystem.Stopper.set(0);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    if (RobotContainer.xboxController.getPOV() == 270 || RobotContainer.xboxController.getPOV() == 90) {
+    isRobotOriented = true;
+    }
+    else {
+    isRobotOriented = false;
+    }
+
+    
+    if (isRobotOriented == false) {
+    SpeedMultiplier = 1-(0.85*RobotContainer.m_driverController.getLeftTriggerAxis());
     if(Math.abs(RobotContainer.m_driverController.getLeftY())>0.2){
-      xSpeed = -0.7*RobotContainer.m_driverController.getLeftY();
+      xSpeed = -SpeedMultiplier*RobotContainer.m_driverController.getLeftY();
     } else {
       xSpeed = 0;
     }  
     if(Math.abs(RobotContainer.m_driverController.getLeftX())>0.2){
-      ySpeed = -0.7*RobotContainer.m_driverController.getLeftX();
+      ySpeed = -SpeedMultiplier*RobotContainer.m_driverController.getLeftX();
     } else {
       ySpeed = 0;
     }  
     if(Math.abs(RobotContainer.m_driverController.getRightX())>0.2){
-      rot = -0.7*RobotContainer.m_driverController.getRightX();
+      rot = -RobotContainer.m_driverController.getRightX();
     } else {
       rot = 0;
-    }  
-    RobotContainer.m_DriveSubsystem.drive(xSpeed, ySpeed, rot, false, true);
-   
+    }
     
+
+    RobotContainer.m_DriveSubsystem.drive(xSpeed, ySpeed, rot, true, true);
+  }
+  else if (RobotContainer.xboxController.getPOV() == 270) {
+    RobotContainer.m_DriveSubsystem.drive(0,0.3,rot,false,true);
+  }
+  else if (RobotContainer.xboxController.getPOV() == 90) {
+    RobotContainer.m_DriveSubsystem.drive(0,-0.3,rot,false,true);
+  }
+   
+    SmartDashboard.putNumber("Motor Power X", xSpeed);
+    SmartDashboard.putNumber("Motor Power Y", ySpeed);
+    SmartDashboard.putNumber("Among Us", RobotContainer.xboxController.getPOV());
   }
 
   // Called once the command ends or is interrupted.
